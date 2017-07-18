@@ -151,7 +151,25 @@ $GLOBALS['XHPROF_LIB_ROOT'] = dirname(dirname(__FILE__)) . "/lib/xhprof_lib";
 可以看到xhprof的文件列表、点击进去，可以查看图形界面的详情
 ```
 
-![xhprof](/Users/nj/Pictures/pic-work/xhprof.png)
+![xhprof](../image/xhprof.png)
+
+
+####问题：
+
+```
+1. 如果是php55的版本+xhprof0.94(2)
+很可能会遇到 
+2017/07/17 23:17:20 [error] 3420#0: *99 recv() failed (104: Connection reset by peer) while reading response header from upstream, client: 10.33.3.37, server: dev.act.you.lianjia.com, request: "POST /customer/getCustomerList HTTP/1.1", upstream: "fastcgi://127.0.0.1:9000", host: "act.cc"
+这样的错误，检查fpm的日志，可以发现进程总是重启，这是xhprof的一个bug、
+参考https://github.com/phacility/xhprof/commit/55a47c0d8ffeea4b84133fd21103caa816676b5d
+修改之后重新编译即可
+
+2. 图像出不来
+1）先用的是graphviz 2.26的版本、不支持png格式
+2）改为2.24.0 的版本ok
+3）其它版本测试 2.40编译失败 环境centos6.5 
+```
+
 
 
 ^(*￣(oo)￣)^ ## 使用顺利
