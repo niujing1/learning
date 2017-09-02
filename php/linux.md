@@ -20,3 +20,19 @@ chkconfig --list
    然后执行 chkconfig on
 更多chkconfig的使用、请参考 chkconfig --help
 ```
+
+linux下各种配置文件的加载顺序：
+
+```
+通常Linux下的配置文件：
+/etc/profile  /etc/profile.d/*.sh  ~/.bash_profile  ~/.bashrc  /etc/bashrc
+
+不同场景下的配置文件的加载机制不同，可以分3种情况
+1. 正常用户登录进入bash环境：
+   /etc/profile > /etc/profile.d/*.sh > ~/.bash_profile > ~/.bashrc > /etc/bashrc
+
+2. 使用su切换用户
+   ~/.bashrc > /etc/bashrc > /etc/profile.d/*.sh
+
+3. 非登录情况 nologin
+   ~/.bashrc > /etc/bashrc > /etc/profile.d/*.sh
